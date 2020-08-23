@@ -12,8 +12,8 @@ See examples of this data in Plex below:
  ### Screenshots
 <details><summary>Expand</summary>
 <p>
-<img src="/screenshots/season%20titles.png"></img>
-<img src="/screenshots/season%20summary.png"></img>
+<img src="/screenshots/season%20titles.png?raw=true"></img>
+<img src="/screenshots/season%20summary.png?raw=true"></img>
 </p>
 </details>
 
