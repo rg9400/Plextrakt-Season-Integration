@@ -20,30 +20,28 @@ from plexapi.server import PlexServer
 PLEX_URL = "http://localhost:32400"
 PLEX_TOKEN = ""
 TRAKT_CLIENT_ID = ""
-#For the list of shows and libraries used below, use exact titles in quotes from Plex. Maintain the list [] format, separating items with ,
+DEBUG = False #Set to True for the log file to contain detailed logs rather than what is seen on console
 
-#Config for resetting Plex data
-RESET = False #Set to True to reset items. Reset happens before the pull
+#Config for resetting Plex data. Note resets happen before the Trakt Pull
+RESET = False #Set to True to reset all custom titles/summaries in the specified libraries.
 RESET_LIBRARIES = ["Anime", "TV Shows"] #List of libraries to reset if enabled above. Leave empty to not reset data for an entire library.
 RESET_SHOWS = ["Dragon Ball Z", "The Legend of Korra"] #List of shows to reset if enabled above. Leave empty to not reset data for specific shows
-RESET_TITLES = True #Set False to turn off resetting season titles. Won't work if Reset is false
-RESET_SUMMARIES = True #Set False to turn off resetting season summaries. Won't work if Reset is False
-LOCK_TITLE_ON_RESET = True #If True, we lock the titles so they don't get rescraped in the pull
-LOCK_SUMMARY_ON_RESET = True #If True, we lock the summaries so they don't get rescraped in the pull
+RESET_TITLES = True #Set to True if you want to reset the season's titles
+RESET_SUMMARIES = True #Set to True if you want to reset the season's summaries
+LOCK_TITLE_ON_RESET = True #Set to True if you want to lock the title after resetting it. This can prevent it from being changed by future runs of the script.
+LOCK_SUMMARY_ON_RESET = True #Set to True if you want to lock the summary after resetting it. This can prevent it from being changed by future runs of the script.
 
 #Config for pulling data from Trakt
 TRAKT_PULL = True #Set to True to grab data from Trakt
 TV_SHOW_LIBRARIES = ["TV Shows", "Anime"] #List of libraries for which to grab data if enabled above. Leave empty to not grab data for an entire library.
 TV_SHOW_NAMES = ["Avatar: The Last Airbender", "American Horror Story"] #List of shows for which to grab data if enabled above. Leave empty to not grab data for specific shows.
-FORCE_REFRESH = False #Set to True to grab data for already locked season titles/shows, else those will be ignored
-PULL_SEASON_TITLES = True #Set False to turn off grabbing season titles from Trakt
-PULL_SEASON_SUMMARIES = True #Set False to turn off grabbing season summaries from Trakt
-LOCK_TITLE_ON_SUCCESSFUL_PULL = True #If True, we lock titles found on Trakt so they won't get rescraped in subsequent pulls
-LOCK_TITLE_ON_FAILED_PULL = True #If True, we lock season titles NOT found on Trakt so they won't get rescraped in subsequent pulls
-LOCK_SUMMARY_ON_SUCCESSFUL_PULL = True #If True, we lock summaries found on Trakt so they won't get rescraped in subsequent pulls
-LOCK_SUMMARY_ON_FAILED_PULL = True #If True, we lock summaries NOT found on Trakt so they won't get rescraped in subsequent pulls
-
-DEBUG = False #If True, the log file will contain detailed logs rather than what is seen on console
+FORCE_REFRESH = False #Set to True to grab data for already locked season titles/shows, otherwise, it will ignore and filter those out.
+PULL_SEASON_TITLES = True #Set to True to turn on grabbing season titles from Trakt
+PULL_SEASON_SUMMARIES = True #Set to True to turn on grabbing season summaries from Trakt
+LOCK_TITLE_ON_SUCCESSFUL_PULL = True #Set to True to lock season titles found on Trakt so they won't get rescraped in subsequent pulls
+LOCK_TITLE_ON_FAILED_PULL = True #Set to True to lock season titles *NOT* found on Trakt so they won't get rescraped in subsequent pulls
+LOCK_SUMMARY_ON_SUCCESSFUL_PULL = True #Set to True to lock season summaries found on Trakt so they won't get rescraped in subsequent pulls
+LOCK_SUMMARY_ON_FAILED_PULL = True #Set to True to lock summaries *NOT* found on Trakt so they won't get rescraped in subsequent pulls
 ###############################################################################
 
 ## CODE BELOW ##

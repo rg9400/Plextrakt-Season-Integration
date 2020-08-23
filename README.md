@@ -33,9 +33,9 @@ The script has to make two calls to Trakt per show, so the number of requests ca
 
 **TRAKT_PULL** - Set to True to pull season data from Trakt
 
-**TV_SHOW_LIBRARIES** A list of libraries for which to pull data. Leave empty if you want to select specific shows instead. Will only work if Trakt Pull is enabled. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option.
+**TV_SHOW_LIBRARIES** - A list of libraries for which to pull data. Leave empty if you want to select specific shows instead. Will only work if Trakt Pull is enabled. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option.
 
-**TV_SHOW_NAMES** = A list of specific shows for which to pull data. Leave empty if you want to select entire libraries instead. Will only work if Trakt Pull is enabled. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option. Can work in addition to the list of libraries, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.
+**TV_SHOW_NAMES** - A list of specific shows for which to pull data. Leave empty if you want to select entire libraries instead. Will only work if Trakt Pull is enabled. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option. Can work in addition to the list of libraries, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.
 
 **FORCE_REFRESH** - Set to True to grab data for already locked season titles/shows, otherwise, it will ignore and filter those out.
 
