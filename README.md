@@ -3,6 +3,18 @@ Script to pull season data such as titles and summaries from Trakt into Plex. Th
 
 The script has to make two calls to Trakt per show, so the number of requests can add up. Please be respectful of their API servers, and configure the script to not constantly rescrape your entire Plex library continously.
 
+Note that the data is only as good as what is available in Trakt. If Trakt has poor summaries, those will get added still.
+
+See examples of this data in Plex below:
+
+ ### Screenshots
+<details><summary>Expand</summary>
+<p>
+<img src="/screenshots/season%titles.png"></img>
+<img src="/screenshots/season%summary.png"></img>
+</p>
+</details>
+
 ## General
 
 **PLEX_URL** - Set this to the local URL for your Plex Server
