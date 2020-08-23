@@ -55,15 +55,16 @@ logger_formatter = Formatter('[%(asctime)s] %(name)s - %(levelname)s - %(message
 console_formatter = Formatter('%(message)s')
 console.setFormatter(console_formatter)
 file_logger.setFormatter(logger_formatter)
+log = getLogger('Trakt Seasons')
 console.setLevel(INFO)
 if DEBUG:
     file_logger.setLevel(DEBUG)
+    log.setLevel(DEBUG)
 else:
     file_logger.setLevel(INFO)
-log = getLogger('Trakt Seasons')
+    log.setLevel(INFO)
 log.addHandler(console)
 log.addHandler(file_logger)
-log.setLevel(DEBUG)
 
 def main():
     plex = PlexServer(PLEX_URL, PLEX_TOKEN)
