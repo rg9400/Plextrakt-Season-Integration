@@ -48,6 +48,7 @@ LOCK_SUMMARY_ON_FAILED_PULL = True #Set to True to lock summaries *NOT* found on
 # Set up the rotating log files
 size = 10*1024*1024  # 5MB
 max_files = 5  # Keep up to 7 logs
+os.makedirs(os.path.join(os.path.dirname(sys.argv[0]), 'logs'), exist_ok=True)
 log_filename = os.path.join(os.path.dirname(sys.argv[0]), 'rename_seasons.log')
 file_logger = RotatingFileHandler(log_filename, maxBytes=size, backupCount=max_files)
 console = StreamHandler()
