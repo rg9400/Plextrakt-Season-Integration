@@ -1,6 +1,8 @@
 # Plextrakt-Season-Integration
 Script to pull season data such as titles and summaries from Trakt into Plex. The goal was to be extremely flexible, so the configuration is a bit more involved. However, it should give granularity so that users can get the script to behave how they want.
 
+**Requires latest plexapi. Run `python -m pip install --upgrade git+https://github.com/pkkid/python-plexapi` with python replaced with whatever your python3 binary is to make sure you have the latest one.**
+
 The script has to make two calls to Trakt per show, so the number of requests can add up. Please be respectful of their API servers, and configure the script to not constantly rescrape your entire Plex library continously.
 
 Note that the data is only as good as what is available in Trakt. If Trakt has poor summaries, those will get added still.
