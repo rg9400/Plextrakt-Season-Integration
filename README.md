@@ -1,5 +1,7 @@
 # Plextrakt-Season-Integration
-Script to pull season data such as titles and summaries from Trakt into Plex. The goal was to be extremely flexible, so the configuration is a bit more involved. However, it should give granularity so that users can get the script to behave how they want. Python3+ only (developed with Python 3.8)
+Script to pull season data such as titles and summaries from Trakt into Plex. The goal was to be extremely flexible, so there are numerous flags available when calling the script. This should give granularity so that users can get the script to behave how they want. 
+
+Python3+ only (developed with Python 3.8)
 
 **Requires latest plexapi and requests. Run `python -m pip install --upgrade git+https://github.com/pkkid/python-plexapi requests` with python replaced with whatever your python3 binary is to make sure you have the latest one.**
 
@@ -25,42 +27,38 @@ See examples of this data in Plex below:
 
 **TRAKT_CLIENT_ID** - You can create a Trakt account, then click *Your API Apps* under Settings, create a new app, give it a name. You can leave image, javascript, and the check-in/scrobble permissions blank, but you need to select a redirect uri. You can use the device authentication option listed in the help text or set something like google.com
 
-## Reset
+### Command Line Interface
 
-**RESET** - Set to True to reset all custom titles/summaries in the specified libraries. Please note that resets will happen before any Trakt pull if enabled.
+The script is constructed by calling `python trakt_seasons.py [general parameters] reset|pull [command-specific parameters]`
 
-**RESET_LIBRARIES** - A list of libraries to reset. Leave empty if you want to select specific shows instead. Will only work if Reset is enabled. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option.
+### General Parameters
 
-**RESET_SHOWS** - A list of specific shows to reset. Leave empty if you want to select entire libraries instead. Will only work if Reset is enabled. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option. Can work in addition to the list of libraries, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.
+**--debug**: Prints debug info to the log file
 
-**RESET_TITLES** - Set to True if you want to reset the season's titles
+### Command
+One of `reset` or `pull` is required. `reset` will reset the specified season data in Plex. `pull` will pull the specified season data from Trakt into Plex.
 
-**RESET_SUMMARIES** - Set to True if you want to reset the season's summaries
+### Command Specific Parameters
+One of the below two parameters is required to determine which data to process.
 
-**LOCK_TITLE_ON_RESET** - Set to True if you want to lock the title after resetting it. This can prevent it from being changed by future runs of the script.
+**--libraries**: A list of libraries to process. Do not use if you want to select specific shows instead. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a space after using this flag.
+Example: `--libraries "TV Shows" "Anime`
 
-**LOCK_SUMMARY_ON_RESET** - Set to True if you want to lock the summary after resetting it. This can prevent it from being changed by future runs of the script.
+**--shows**: A list of specific shows to process. Do not use if you want to select entire libraries instead. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Can work in addition to the list of libraries, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.
+Example: `--shows "Avatar: The Last Airbender" "The Legend of Korra"`
 
-## Trakt Data Pull
+**--data|-d**: Specify whether to pull `title` or `summary` data. Default is both.
+Example: `--data title`
 
-**TRAKT_PULL** - Set to True to pull season data from Trakt
+**--unlock|-u**: 
+* (*reset*) Specify whether to unlock `title` or `summary` data after resetting so it can be rescraped in subsequent pulls. Default is none so that all processed items are locked after the reset. To unlock both, add both values after the flag.
+Example: `--unlock title summary`
+* (*pull*) Specify whether to unlock `successful_title`, `failed_title`, `successful_summary`, or `failed_summary` after the pull so that those items can be rescraped in subsequent pulls. Default is none so that all processed items are locked after the pull. To unlock multiple items, add those values after the flag.
+Example: `--unlock failed_title failed_summary`
 
-**TV_SHOW_LIBRARIES** - A list of libraries for which to pull data. Leave empty if you want to select specific shows instead. Will only work if Trakt Pull is enabled. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option.
+**--force|-f**: (*pull only*) Set this flag to force rescrape all existing locked season title/summary data in Plex. Default is False so that the script ignores and filters out these items.
 
-**TV_SHOW_NAMES** - A list of specific shows for which to pull data. Leave empty if you want to select entire libraries instead. Will only work if Trakt Pull is enabled. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Follow the format given by the default option. Can work in addition to the list of libraries, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.
-
-**FORCE_REFRESH** - Set to True to grab data for already locked season titles/shows, otherwise, it will ignore and filter those out.
-
-**PULL_SEASON_TITLES** - Set to True to turn on grabbing season titles from Trakt
-
-**PULL_SEASON_SUMMARIES** - Set to True to turn on grabbing season summaries from Trakt
-
-**LOCK_TITLE_ON_SUCCESSFUL_PULL** - Set to True to lock season titles found on Trakt so they won't get rescraped in subsequent pulls
-
-**LOCK_TITLE_ON_FAILED_PULL** - Set to True to lock season titles *NOT* found on Trakt so they won't get rescraped in subsequent pulls
-
-**LOCK_SUMMARY_ON_SUCCESSFUL_PULL** - Set to True to lock season summaries found on Trakt so they won't get rescraped in subsequent pulls
-
-**LOCK_SUMMARY_ON_FAILED_PULL** - Set to True to lock summaries *NOT* found on Trakt so they won't get rescraped in subsequent pulls
+### Full Example
+`python trakt_seasons.py --debug pull --libraries "TV Shows" --anime "Dragon Ball Z" -f -d titles -u failed_summary`
 
 
