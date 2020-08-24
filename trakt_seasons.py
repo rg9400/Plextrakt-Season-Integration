@@ -1,11 +1,11 @@
-# #!/usr/bin/env python
-# # -*- coding: utf-8 -*-
-# #
-# # Description: Rename season title for TV shows on Plex and populate season data such as titles and summaries.
-# # Make sure plexapi is up to date as this script utilizes features available in the latest version only
-# # Based on the script by SwiftPanda https://github.com/blacktwin/JBOPS/blob/master/utility/rename_seasons.py
-# # Author:       /u/RG9400
-# # Requires:     plexapi, requests
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Description: Rename season title for TV shows on Plex and populate season data such as titles and summaries.
+# Make sure plexapi is up to date as this script utilizes features available in the latest version only
+# Based on the script by SwiftPanda https://github.com/blacktwin/JBOPS/blob/master/utility/rename_seasons.py
+# Author:       /u/RG9400
+# Requires:     plexapi, requests
 
 import re
 import os
