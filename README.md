@@ -17,15 +17,13 @@ See examples of this data in Plex below:
 </p>
 </details>
 
-## General
+## File Config
 
 **PLEX_URL** - Set this to the local URL for your Plex Server
 
 **PLEX_TOKEN** - Find your token by following the instructions here https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/
 
 **TRAKT_CLIENT_ID** - You can create a Trakt account, then click *Your API Apps* under Settings, create a new app, give it a name. You can leave image, javascript, and the check-in/scrobble permissions blank, but you need to select a redirect uri. You can use the device authentication option listed in the help text or set something like google.com
-
-**DEBUG** - Set to True for the log file to contain detailed logs rather than what is seen on console
 
 ## Reset
 
