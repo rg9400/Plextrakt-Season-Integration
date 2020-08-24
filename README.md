@@ -51,9 +51,9 @@ Example: `--shows "Avatar: The Last Airbender" "The Legend of Korra"`
 Example: `--data title`
 
 **`--unlock|-u`**: 
-* (*reset*) Specify whether to unlock `title` or `summary` data after resetting so it can be rescraped in subsequent pulls. Default is none so that all processed items are locked after the reset. To unlock both, add both values after the flag.
+* (*reset*) Specify whether to unlock `title` or `summary` data after resetting so it can be rescraped in subsequent pulls. Default is none so that all processed items are locked after the reset. To unlock both, add both values after the flag.\
 Example: `--unlock title summary`
-* (*pull*) Specify whether to unlock `successful_title`, `failed_title`, `successful_summary`, or `failed_summary` after the pull so that those items can be rescraped in subsequent pulls. Default is none so that all processed items are locked after the pull. To unlock multiple items, add those values after the flag.
+* (*pull*) Specify whether to unlock `successful_title`, `failed_title`, `successful_summary`, or `failed_summary` after the pull so that those items can be rescraped in subsequent pulls. Default is none so that all processed items are locked after the pull. To unlock multiple items, add those values after the flag.\
 Example: `--unlock failed_title failed_summary`
 
 **`--force|-f`**: (*pull only*) Set this flag to force rescrape all existing locked season title/summary data in Plex. Default is False so that the script ignores and filters out these items.
