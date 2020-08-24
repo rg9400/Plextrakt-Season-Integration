@@ -65,4 +65,4 @@ Example: `--unlock failed_title failed_summary`
 **`--force|-f`**: (*pull only*) Set this flag to force rescrape all existing locked season title/summary data in Plex. Default is False so that the script ignores and filters out these items.
 
 ### Full Example
-`python trakt_seasons.py --debug pull --libraries "TV Shows" --shows "Dragon Ball Z" -f -d titles -u failed_summary`
+`python trakt_seasons.py --debug pull --libraries "TV Shows" --shows "Dragon Ball Z" -f -d title -u failed_summary`
