@@ -33,18 +33,22 @@ The script is constructed by calling `python trakt_seasons.py [general parameter
 
 ### General Parameters
 
-**`--debug`**: Prints debug info to the log file
+**`--help|-h`**: Show a help message for general parameters and commands and exit
+
+**`--debug`**: Prints debug info to the log file. Default is false
 
 ### Command
 One of `reset` or `pull` is required. `reset` will reset the specified season data in Plex. `pull` will pull the specified season data from Trakt into Plex.
 
 ### Command Specific Parameters
-One of the below two parameters is required to determine which data to process.
 
-**`--libraries`**: A list of libraries to process. Do not use if you want to select specific shows instead. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a space after using this flag.\
+**`--help|-h`**: Show a help message for command-specific parameters and exit
+
+One of the below two parameters is required to determine which data to process. Both can work together, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.
+
+* **`--libraries`**: A list of libraries to process. Do not use if you want to select specific shows instead. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a space after using this flag.\
 Example: `--libraries "TV Shows" "Anime`
-
-**`--shows`**: A list of specific shows to process. Do not use if you want to select entire libraries instead. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma. Can work in addition to the list of libraries, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.\
+* **`--shows`**: A list of specific shows to process. Do not use if you want to select entire libraries instead. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma.\
 Example: `--shows "Avatar: The Last Airbender" "The Legend of Korra"`
 
 **`--data|-d`**: Specify whether to pull `title` or `summary` data. Default is both.

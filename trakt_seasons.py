@@ -26,14 +26,28 @@ TRAKT_CLIENT_ID = ""
 ## CODE BELOW ##
 
 #Set up the argparse for all the script arguments
-parser = argparse.ArgumentParser(description="Plextrakt Season Integration")
+parser = argparse.ArgumentParser(description="Plextrakt Season Integration", epilog='Run \'trakt_seasons.py COMMAND --help\' for more info on a command')
+parser._positionals.title = 'required arguments'
 parser.add_argument(
                   '--debug', 
                   action='store_true', 
                   default=False,
-                  help='Print debug info to the log file'
+                  help='Print debug info to the log file. Default is False'
                   )
 parent_parser = argparse.ArgumentParser(add_help=False)
+items = parent_parser.add_argument_group("(required) items to process")
+items.add_argument(
+                  '--libraries',
+                  nargs='+',
+                  default=[],
+                  help='Space separated list of libraries in quotes to process with names matching Plex exactly.'
+                  )
+items.add_argument(
+                  '--shows',
+                  nargs='+',
+                  default=[],
+                  help='Space separated list of shows in quotes to process with names matching Plex exactly.'
+                  )
 parent_parser.add_argument(
                   '--data', '-d',
                   choices=['title', 'summary'],
@@ -41,19 +55,7 @@ parent_parser.add_argument(
                   default=['title', 'summary'],
                   help='Process title or summary data. Default is both'
                   )
-parent_parser.add_argument(
-                  '--libraries',
-                  nargs='+',
-                  default=[],
-                  help='List of libraries to process with names matching Plex exactly.'
-                  )
-parent_parser.add_argument(
-                  '--shows',
-                  nargs='+',
-                  default=[],
-                  help='List of shows to process with names matching Plex exactly.'
-                  )
-subparsers = parser.add_subparsers(dest='command')
+subparsers = parser.add_subparsers(dest='command', help='COMMAND')
 reset = subparsers.add_parser(
                   'reset',
                   help='Reset season data in Plex',
@@ -63,7 +65,7 @@ reset.add_argument(
                   choices=['title', 'summary'],
                   nargs='+',
                   default=[],
-                  help='Unlock title or summary after reset so it can be rescraped. Default is none'
+                  help='Space separated list of fields to unlock after reset so they can be rescraped. Default is none'
                   )
 pull = subparsers.add_parser(
                   'pull',
