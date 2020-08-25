@@ -49,11 +49,11 @@ One of `reset` or `pull` is required.
 One of the below two parameters is required to determine which data to process. Both can work together, e.g. if you want your entire anime library but only "American Horror Story" from your TV Show library.
 
 * **`--libraries`**: A list of libraries to process. Do not use if you want to select specific shows instead. Please note that you need to use the exact name of the library as it appears in Plex, place it in quotes, and separate multiple libraries with a space after using this flag.\
-Example: `--libraries "TV Shows" "Anime`
+Example: `--libraries "TV Shows" "Anime"`
 * **`--shows`**: A list of specific shows to process. Do not use if you want to select entire libraries instead. Please note that you need to use the exact name of the show as it appears in Plex, place it in quotes, and separate multiple libraries with a comma.\
 Example: `--shows "Avatar: The Last Airbender" "The Legend of Korra"`
 
-**`--data|-d`**: Specify whether to pull `title` or `summary` data. Default is both.\
+**`--data|-d`**: Specify whether to proccess `title` or `summary` data. Default is both.\
 Example: `--data title`
 
 **`--unlock|-u`**: 
