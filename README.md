@@ -9,7 +9,7 @@ The script has to make two calls to Trakt per show, so the number of requests ca
 
 Note that the data is only as good as what is available in Trakt. If Trakt has poor summaries, those will get added still.
 
-It only works with the TVDB agent for now. I can look at adding support for TMDB, but I was hesitant since the season order may not match Trakt as Trakt tends to use TVDB as its metadata source
+Now supports libraries using the TMDB agent as well, but I cannot vouch for the data as it is entirely feasible that the seasons TMDB and Trakt are using vary widely.
 
 See examples of this data in Plex below:
 

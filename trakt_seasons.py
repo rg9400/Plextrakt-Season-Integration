@@ -195,23 +195,26 @@ def main():
                 if all_titles_locked and all_summaries_locked:
                     log.info('Skipping show {} because force refresh is disabled and all requested items are locked'.format(show.title))
                     continue
-            try:
-                tvdb_id = int(re.search(r'thetvdb:\/\/(.*)\?', show.guid).group(1))
-            except:
-                log.warning('Error parsing TVDB ID for show {}'.format(show.title))
-                tvdb_id = None
+            if "thetvdb" in show.guid:
+                id = int(re.search(r'thetvdb:\/\/(.*)\?', show.guid).group(1))
+                trakt_search_api = 'https://api.trakt.tv/search/tvdb/{}?type=show'.format(id)
+            elif "themoviedb" in show.guid:
+                id = int(re.search(r'themoviedb:\/\/(.*)\?', show.guid).group(1))
+                trakt_search_api = 'https://api.trakt.tv/search/tmdb/{}?type=show'.format(id)
+            else: 
+                log.warning('Could not find a TVDB or TMDB ID for show {}'.format(show.title))
+                id = None
                 slug = None
 
-            if tvdb_id:
-                trakt_search_api = 'https://api.trakt.tv/search/tvdb/{}?type=show'.format(tvdb_id)
+            if id:
                 trakt_search = requests.get(trakt_search_api, headers=trakt_headers).json()
                 try:
                     slug = trakt_search[0]['show']['ids']['slug']
                 except:
-                    log.warning('Could not find Trakt slug for show {} and TVDB ID {}'.format(show.title, tvdb_id))
+                    log.warning('Could not find Trakt slug for show {} and guid {}'.format(show.title, show.guid))
                     slug = None
             else:
-                log.warning('No TVDB ID found for show {}, skipping'.format(show.title))
+                log.warning('No guid found for show {}, skipping'.format(show.title))
 
             if slug:
                 trakt_season_api = 'https://api.trakt.tv/shows/{}/seasons?extended=full'.format(slug)
