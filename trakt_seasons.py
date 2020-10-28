@@ -286,7 +286,7 @@ def main():
                         plex_season.edit(**edit)
                     except:
                         log.warning("{} Season {} exists on Trakt but not in Plex".format(show.title, season_number))
-            time.sleep(5)
+            time.sleep(1)
         log.info("Pull process finished")
         log.info("Processed {} shows across {} seasons. Found {} new titles and {} new summaries".format(show_counter, season_counter, new_title_counter, new_summary_counter))
 
