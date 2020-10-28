@@ -272,7 +272,7 @@ def main():
                             plex_season.edit(**edit)
                         except:
                             log.warning("{} Season {} exists on Trakt but not in Plex".format(show.title, season_number))
-            time.sleep(1)
+            time.sleep(5)
         log.info("Pull process finished")
 
 if __name__ == "__main__":
