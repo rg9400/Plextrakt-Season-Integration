@@ -74,5 +74,5 @@ Example: `--unlock failed_title failed_summary`
 
 You can also run this on two separate schedules. One will scrape only new items, and another will force scrape all items, excluding labels you can use to signal that certain things have been overriden manually
 
-`python trakt_seasons.py --debug pull --libraries "TV Shows" "Anime"` running weekly
+`python trakt_seasons.py --debug pull --libraries "TV Shows" "Anime"` running weekly\
 `python trakt_seasons.py --debug pull --force --exclude plextrakt --libraries "TV Shows" "Anime"` running every month or two
