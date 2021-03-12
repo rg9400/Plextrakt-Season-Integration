@@ -55,6 +55,11 @@ parent_parser.add_argument(
                   default=['title', 'summary'],
                   help='Process title or summary data. Default is both'
                   )
+parent_parser.add_argument(
+                  '--exclude', '-e',
+                  default=None,
+                  help='Labels to exclude from processing'
+                  )
 subparsers = parser.add_subparsers(dest='command', help='COMMAND')
 reset = subparsers.add_parser(
                   'reset',
@@ -119,8 +124,14 @@ def main():
     if len(args.libraries) > 0:
         for library in args.libraries:
             try:
-                process_list.extend(plex.library.section(library).all())
-                log.info("Processing all shows found in library {}".format(library))
+                section = plex.library.section(library)
+                log.info("Processing library {}".format(library))
+                for show in section.all():
+                    if args.exclude not in (label.tag.lower() for label in show.labels):
+                        process_list.append(show)
+                    else:
+                        log.info("Excluding {} because {} found in show's labels".format(show.title, args.exclude))
+                        process_list.extend(plex.library.section(library).all())
             except:
                 log.error("Could not find library {} in Plex".format(library))
     else:
@@ -128,8 +139,12 @@ def main():
     if len(args.shows) > 0:
         for show in args.shows:
             try:
-                process_list.append(plex.search(show)[0])
-                log.info("Proccessing show {}".format(show))
+                entry = plex.search(show)[0]
+                if args.exclude not in (label.tag.lower() for label in entry.labels):
+                    process_list.append(entry)
+                    log.info("Proccessing show {}".format(show))
+                else:
+                    log.info("Excluding {} because {} found in show's labels".format(show, args.exclude))
             except:
                 log.error("Could not find show {} in Plex".format(show))
     else:
