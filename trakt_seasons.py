@@ -178,7 +178,7 @@ def main():
         log.info("Reset {} seasons across {} shows".format(reset_season_counter, reset_show_counter))
 
     if args.command == 'pull':
-        log.info('Starting pull process')
+        log.info('Starting {} process'.format(args.command))
         show_counter = 0
         season_counter = 0
         new_title_counter = 0
@@ -205,22 +205,39 @@ def main():
                 if all_titles_locked and all_summaries_locked:
                     log.debug('Skipping show {} because force refresh is disabled and all requested items are locked'.format(show.title))
                     continue
-            if "thetvdb" in show.guid:
-                id = int(re.search(r'thetvdb:\/\/(.*)\?', show.guid).group(1))
-                trakt_search_api = 'https://api.trakt.tv/search/tvdb/{}?type=show'.format(id)
+            if show.guids:
+                imdb = next((guid.id for guid in show.guids if "imdb" in guid.id), None)
+                tmdb = next((guid.id for guid in show.guids if "tmdb" in guid.id), None)
+                tvdb = next((guid.id for guid in show.guids if "tvdb" in guid.id), None)
+            elif "thetvdb" in show.guid:
+                tvdb = show.guid
             elif "themoviedb" in show.guid:
-                id = int(re.search(r'themoviedb:\/\/(.*)\?', show.guid).group(1))
-                trakt_search_api = 'https://api.trakt.tv/search/tmdb/{}?type=show'.format(id)
+                tmdb = show.guid
             else: 
-                log.warning('Could not find a TVDB or TMDB ID for show {}'.format(show.title))
+                log.warning('Could not find any external identifier for show {}'.format(show.title))
                 continue
+            if imdb:
+                id = imdb
+                type = 'imdb'
+            elif tmdb:
+                id = tmdb
+                type = 'tmdb'
+            elif tvdb:
+                id = tvdb
+                type = 'tvdb'
+            id = re.search(r':\/\/([^\/]*)', id).group(1)
+            log.debug('Using ID Type {} with identifier {}'.format(type, id))
                 
-            try:
-                trakt_search = requests.get(trakt_search_api, headers=trakt_headers).json()
-                slug = trakt_search[0]['show']['ids']['slug']
-            except:
-                log.warning('Could not find Trakt slug for show {} and guid {}'.format(show.title, show.guid))
-                continue
+            if type == 'imdb':
+                slug = id
+            else:
+                trakt_search_api = 'https://api.trakt.tv/search/{}/{}?type=show'.format(type, id)
+                try:
+                    trakt_search = requests.get(trakt_search_api, headers=trakt_headers).json()
+                    slug = trakt_search[0]['show']['ids']['slug']
+                except:
+                    log.warning('Could not find Trakt slug for show {} and guid {}'.format(show.title, show.guid))
+                    continue
 
             trakt_season_api = 'https://api.trakt.tv/shows/{}/seasons?extended=full'.format(slug)
             try:
