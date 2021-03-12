@@ -3,7 +3,7 @@ Script to pull season data such as titles and summaries from Trakt into Plex. Th
 
 Python3+ only (developed with Python 3.8)
 
-**Requires latest plexapi and requests. Run `python -m pip install --upgrade git+https://github.com/pkkid/python-plexapi requests` with python replaced with whatever your python3 binary is to make sure you have the latest one.**
+**Requires plexapi 4.4.1 or higher and requests. Run `python -m pip install --upgrade plexapi requests` with python replaced with whatever your python3 binary is to make sure you have the latest one.**
 
 The script has to make two calls to Trakt per show, so the number of requests can add up. Please be respectful of their API servers, and configure the script to not constantly rescrape your entire Plex library continously.
 
