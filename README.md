@@ -58,6 +58,9 @@ Example: `--shows "Avatar: The Last Airbender" "The Legend of Korra"`
 **`--data|-d`**: Specify whether to proccess `title` or `summary` data. Default is both.\
 Example: `--data title`
 
+**`--exclude|-e`**: Specify a label (in lowercase) that you want to exclude. Shows with this label will not be processed.\
+Example: `--exclude overriden`
+
 **`--unlock|-u`**: 
 * (*reset*) Specify whether to unlock `title` or `summary` data after resetting so it can be rescraped in subsequent pulls. Default is none so that all processed items are locked after the reset. To unlock both, add both values after the flag.\
 Example: `--unlock title summary`
@@ -68,3 +71,8 @@ Example: `--unlock failed_title failed_summary`
 
 ### Full Example
 `python trakt_seasons.py --debug pull --libraries "TV Shows" --shows "Dragon Ball Z" -f -d summary -u failed_summary`
+
+You can also run this on two separate schedules. One will scrape only new items, and another will force scrape all items, excluding labels you can use to signal that certain things have been overriden manually
+
+`python trakt_seasons.py --debug pull --libraries "TV Shows" "Anime"` running weekly
+`python trakt_seasons.py --debug pull --force --exclude plextrakt --libraries "TV Shows" "Anime"` running every month or two
