@@ -131,7 +131,7 @@ def main():
                         process_list.append(show)
                     else:
                         log.info("Excluding {} because {} found in show's labels".format(show.title, args.exclude))
-                        process_list.extend(plex.library.section(library).all())
+                        continue
             except:
                 log.error("Could not find library {} in Plex".format(library))
     else:
@@ -145,6 +145,7 @@ def main():
                     log.info("Proccessing show {}".format(show))
                 else:
                     log.info("Excluding {} because {} found in show's labels".format(show, args.exclude))
+                    continue
             except:
                 log.error("Could not find show {} in Plex".format(show))
     else:
